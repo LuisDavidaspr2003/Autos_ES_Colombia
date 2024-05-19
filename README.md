@@ -4,7 +4,7 @@ Abre una terminal o línea de comandos.
 Clona el repositorio de "Autos Colombia" desde GitHub:
 
 
-# git clone https://github.com/tu_usuario/autos_colombia.git
+# gh repo clone LuisDavidaspr2003/Autos_ES_Colombia
 cd autos_colombia
 
 
