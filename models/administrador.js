@@ -16,7 +16,7 @@ async function agregarUsuario(nombre, correo, telefono, tipo) {
 // Función para listar todos los usuarios del sistema
 async function listarUsuarios() {
     try {
-        const query = 'SELECT * FROM Usuarios';
+        const query = 'SELECT id_usuario, nombre, correo, telefono, tipo_usuario FROM Usuarios';
         const result = await db.query(query);
         return { success: true, usuarios: result.rows };
     } catch (error) {
@@ -28,10 +28,14 @@ async function listarUsuarios() {
 // Función para eliminar un usuario del sistema
 async function eliminarUsuario(idUsuario) {
     try {
-        const query = 'DELETE FROM Usuarios WHERE ID_Usuario = $1';
-        const values = [idUsuario];
-        await db.query(query, values);
-        return { success: true, message: 'Usuario eliminado correctamente' };
+        const query = 'DELETE FROM Usuarios WHERE id_usuario = $1';
+        const result = await db.query(query, [idUsuario]);
+        
+        if (result.rowCount === 1) {
+            return { success: true, message: 'Usuario eliminado correctamente' };
+        } else {
+            return { success: false, message: 'Usuario no encontrado' };
+        }
     } catch (error) {
         console.error('Error al eliminar usuario:', error);
         return { success: false, message: 'Error al eliminar usuario' };
@@ -51,24 +55,22 @@ async function agregarAdministrador(nombre, correo, telefono) {
     }
 }
 
-// Función para agregar un nuevo vehículo al sistema
-async function agregarVehiculo(placa, marca, modelo) {
+// Función para listar todos los administradores del sistema
+async function listarAdministradores() {
     try {
-        const query = 'INSERT INTO Vehiculos (Placa, Marca, Modelo) VALUES ($1, $2, $3)';
-        const values = [placa, marca, modelo];
-        await db.query(query, values);
-        return { success: true, message: 'Vehículo agregado correctamente' };
+        const query = 'SELECT id_administrador, nombre, correo, telefono FROM Administradores';
+        const result = await db.query(query);
+        return { success: true, administradores: result.rows };
     } catch (error) {
-        console.error('Error al agregar vehículo:', error);
-        return { success: false, message: 'Error al agregar vehículo' };
+        console.error('Error al listar administradores:', error);
+        return { success: false, message: 'Error al listar administradores' };
     }
 }
-
 
 module.exports = {
     agregarUsuario,
     listarUsuarios,
     eliminarUsuario,
     agregarAdministrador,
-    agregarVehiculo,
+    listarAdministradores,
 };

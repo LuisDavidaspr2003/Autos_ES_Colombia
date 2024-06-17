@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const path = require('path');
 
 // Importar las rutas de los diferentes módulos
 const administradorRoutes = require('./routes/administrador');
@@ -24,7 +25,15 @@ app.use('/vehiculos', vehiculosRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
-    res.send('¡La aplicación está funcionando correctamente!');
+    res.send('¡La aplicación está funcionando correctamente gooooooooooooooool!');
+});
+
+// Ruta estática para el frontend
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+// Manejar todas las demás rutas y enviar el archivo index.html del frontend
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
 });
 
 module.exports = app;

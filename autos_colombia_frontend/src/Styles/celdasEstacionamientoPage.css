@@ -1,0 +1,48 @@
+.container {
+  width: 80%;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.lists-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.form-container {
+  margin-bottom: 20px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+.celdas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.celda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: lightgray;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.disponible {
+  background-color: lightgreen;
+}
+
+.no-disponible {
+  background-color: rgb(133, 240, 128);
+}

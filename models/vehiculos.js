@@ -46,7 +46,7 @@ async function eliminarVehiculo(placaVehiculo) {
 async function obtenerVehiculos() {
     try {
         // Consultar todos los vehículos de la tabla Vehiculos
-        const query = 'SELECT * FROM Vehiculos';
+        const query = 'SELECT id_vehiculo, placa, marca, modelo, hora_entrada, tipo_servicio, estado, id_usuario FROM Vehiculos';
         const result = await db.query(query);
         return { success: true, vehiculos: result.rows };
     } catch (error) {
@@ -54,7 +54,6 @@ async function obtenerVehiculos() {
         return { success: false, message: 'Error al obtener los vehículos.' };
     }
 }
-
 // Exportar las funciones para que estén disponibles para otros módulos
 module.exports = {
     agregarVehiculo,

@@ -1,0 +1,40 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.message {
+  color: red;
+  font-size: 16px;
+}
+
+.vehiculos-list {
+  display: grid;
+  gap: 20px;
+}
+
+.vehiculo-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.vehiculo-details {
+  margin-bottom: 10px;
+}
+
+.vehiculo-details p {
+  margin: 5px 0;
+}
+
+.vehiculo-details strong {
+  margin-right: 5px;
+  font-weight: bold;
+}

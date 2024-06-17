@@ -15,9 +15,20 @@ async function listarUsuarios(req, res) {
 
 // Controlador para eliminar un usuario del sistema
 async function eliminarUsuario(req, res) {
-    const { idUsuario } = req.params;
-    const resultado = await administradorModule.eliminarUsuario(idUsuario);
-    res.json(resultado);
+    const { id } = req.params;
+
+    try {
+        const resultado = await administradorModule.eliminarUsuario(id);
+
+        if (resultado.success) {
+            return res.status(200).json(resultado);
+        } else {
+            return res.status(404).json(resultado); // Devuelve 404 si el usuario no se encuentra
+        }
+    } catch (error) {
+        console.error('Error al eliminar usuario:', error);
+        return res.status(500).json({ success: false, message: 'Error interno al eliminar usuario' });
+    }
 }
 
 // Controlador para agregar un nuevo administrador al sistema
@@ -27,21 +38,16 @@ async function agregarAdministrador(req, res) {
     res.json(resultado);
 }
 
-// Controlador para agregar un nuevo vehículo al sistema
-async function agregarVehiculo(req, res) {
-    const { placa, marca, modelo } = req.body;
-    const resultado = await administradorModule.agregarVehiculo(placa, marca, modelo);
+// Controlador para listar todos los administradores del sistema
+async function listarAdministradores(req, res) {
+    const resultado = await administradorModule.listarAdministradores();
     res.json(resultado);
 }
-
-
-
 
 module.exports = {
     agregarUsuario,
     listarUsuarios,
     eliminarUsuario,
     agregarAdministrador,
-    agregarVehiculo,
- 
+    listarAdministradores
 };
